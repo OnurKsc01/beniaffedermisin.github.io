@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Affet</title>
+<style>
+  :root{
+    --page-bg:#fff9f7;
+    --rose-main:#d33a4a;
+    --rose-deep:#8e1a2a;
+    --rose-light:#ffc8cf;
+    --leaf-green:#2f7a3f;
+    --stem-green:#2b6b36;
+    --accent:#533b3b;
+  }
+  html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:var(--accent);}
+  body{
+    background:linear-gradient(180deg,var(--page-bg) 0%, #fff 45%);
+    display:flex;flex-direction:column;align-items:center;padding:28px 16px 60px;
+  }
+
+  .flower-wrap{
+    width:100%;max-width:720px;display:flex;justify-content:center;margin-bottom:18px;
+  }
+
+  .flower{
+    width:220px;height:220px;position:relative;display:block;
+    filter:drop-shadow(0 16px 30px rgba(0,0,0,.12));
+  }
+
+  .petal{
+    position:absolute;left:50%;top:50%;
+    transform-origin:50% 120px;
+    border-radius:60% 60% 40% 40%/70% 70% 30% 30%;
+    box-shadow: 0 8px 18px rgba(0,0,0,.12), inset 0 -8px 24px rgba(255,255,255,.06);
+  }
+
+  .petal.inner{
+    width:88px;height:110px;margin:-55px 0 0 -44px;
+    background: radial-gradient(circle at 30% 20%, #fff5f6 0%, var(--rose-light) 20%, var(--rose-main) 75%);
+    opacity:0.95;
+  }
+  .petal.inner.p1{ transform: rotate(0deg) translateY(-8px) scale(1); }
+  .petal.inner.p2{ transform: rotate(45deg) translateY(-6px) scale(.98); }
+  .petal.inner.p3{ transform: rotate(90deg) translateY(-4px) scale(.96); }
+  .petal.inner.p4{ transform: rotate(135deg) translateY(-6px) scale(.98); }
+  .petal.inner.p5{ transform: rotate(180deg) translateY(-8px) scale(1); }
+
+  .petal.mid{
+    width:120px;height:150px;margin:-75px 0 0 -60px;
+    background: radial-gradient(circle at 28% 25%, #ffe8ea 0%, var(--rose-main) 35%, var(--rose-deep) 85%);
+    opacity:0.98;
+  }
+  .petal.mid.p1{ transform: rotate(22deg) translateY(-6px) scale(1); }
+  .petal.mid.p2{ transform: rotate(67deg) translateY(-4px) scale(.98); }
+  .petal.mid.p3{ transform: rotate(112deg) translateY(-2px) scale(.96); }
+  .petal.mid.p4{ transform: rotate(157deg) translateY(-4px) scale(.98); }
+  .petal.mid.p5{ transform: rotate(202deg) translateY(-6px) scale(1); }
+  .petal.mid.p6{ transform: rotate(247deg) translateY(-4px) scale(.98); }
+  .petal.mid.p7{ transform: rotate(292deg) translateY(-2px) scale(.96); }
+  .petal.mid.p8{ transform: rotate(337deg) translateY(-4px) scale(.98); }
+
+  .petal.outer{
+    width:150px;height:180px;margin:-90px 0 0 -75px;
+    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,0.02)), radial-gradient(circle at 35% 30%, var(--rose-light) 0%, var(--rose-main) 45%, var(--rose-deep) 90%);
+    opacity:0.92;
+  }
+  .petal.outer.p1{ transform: rotate(15deg) translateY(-2px) scale(1); }
+  .petal.outer.p2{ transform: rotate(60deg) translateY(-1px) scale(.98); }
+  .petal.outer.p3{ transform: rotate(105deg) translateY(0px) scale(.97); }
+  .petal.outer.p4{ transform: rotate(150deg) translateY(-1px) scale(.98); }
+  .petal.outer.p5{ transform: rotate(195deg) translateY(-2px) scale(1); }
+  .petal.outer.p6{ transform: rotate(240deg) translateY(-1px) scale(.98); }
+  .petal.outer.p7{ transform: rotate(285deg) translateY(0px) scale(.97); }
+  .petal.outer.p8{ transform: rotate(330deg) translateY(-1px) scale(.98); }
+
+  .center{
+    position:absolute;left:50%;top:50%;width:74px;height:74px;margin:-37px 0 0 -37px;border-radius:50%;
+    background: radial-gradient(circle at 30% 30%, #fff1f2 0%, #ffd7dd 18%, var(--rose-main) 65%);
+    box-shadow: inset 0 -8px 22px rgba(0,0,0,.06), 0 8px 18px rgba(0,0,0,.12);
+    transform:translateY(6px);
+  }
+  .center::before{
+    content:"";position:absolute;left:50%;top:44%;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:40% 40% 50% 50%;
+    background: linear-gradient(180deg,#ffdfe4,#ffb6c3);
+    transform:rotate(-18deg);
+    box-shadow:inset 0 -6px 12px rgba(255,255,255,.1);
+    opacity:.95;
+  }
+
+  .stem{
+    position:absolute;left:50%;top:190px;width:6px;height:120px;background:linear-gradient(180deg,var(--stem-green),#1f5a2b);
+    transform:translateX(-3px);border-radius:6px;box-shadow:0 6px 12px rgba(0,0,0,.08);
+  }
+  .leaf{
+    position:absolute;width:96px;height:48px;border-radius:42% 58% 12% 88%/50% 50% 50% 50%;
+    background:linear-gradient(180deg,#8fd18e,var(--leaf-green));box-shadow:inset 0 -6px 12px rgba(0,0,0,.06);
+    opacity:0.98;
+  }
+  .leaf.l1{left:calc(50% - 120px);top:240px;transform:rotate(-28deg) scale(.9);}
+  .leaf.l2{left:calc(50% + 40px);top:270px;transform:rotate(22deg) scale(.9);}
+
+  .card{
+    width:100%;max-width:720px;background:linear-gradient(180deg,#fff,#fff8f8);
+    box-shadow:0 12px 30px rgba(0,0,0,.06);border-radius:14px;padding:22px 20px 30px;position:relative;text-align:center;
+  }
+  h1{font-size:20px;margin:6px 0 4px;}
+  p.lead{margin:0 0 12px;color:#6b4a4a;font-size:14px;}
+
+  .controls{display:flex;gap:14px;justify-content:center;align-items:center;margin-top:12px;flex-wrap:wrap;}
+  button.action{appearance:none;border:0;padding:12px 22px;border-radius:10px;background:#fff;color:var(--rose-main);font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.06);transition:transform .18s ease,box-shadow .18s ease,opacity .18s linear;}
+  button.action:active{transform:translateY(2px) scale(.99);}
+
+  /* Affet butonu artık başlangıçta görünür (class "visible" başlangıçta eklendi) */
+  #affet{background:linear-gradient(180deg,#fff0f1,#ffdfe4);color:var(--rose-deep);opacity:1;pointer-events:auto;transform:scale(1);transition:opacity .18s ease, transform .12s ease;}
+  #affet.visible{opacity:1;pointer-events:auto;}
+  #affet.grow{box-shadow:0 24px 44px rgba(211,58,74,.18),0 6px 12px rgba(0,0,0,.06);}
+
+  #affetmedim{background:transparent;border:2px solid rgba(211,58,74,.18);color:var(--rose-main);font-weight:700;border-radius:10px;padding:10px 18px;}
+
+  .hint{font-size:13px;color:#8a5b5b;margin-top:12px;min-height:20px;}
+
+  .thanks{
+    display:none;
+    position:fixed;inset:0;align-items:center;justify-content:center;background:rgba(0,0,0,.36);
+    opacity:0;pointer-events:none;backdrop-filter:blur(3px);
+  }
+  .thanks.show{
+    display:flex;
+    opacity:1;
+    pointer-events:auto;
+    transition:opacity .24s ease;
+  }
+  .thanks .panel{background:linear-gradient(180deg,#fff,#fff8f8);padding:34px;border-radius:14px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25);transform:translateY(4px);}
+  .thanks h2{margin:0 0 6px;font-size:24px;color:var(--rose-deep);}
+  .thanks p{margin:0;color:#6b4a4a;}
+
+  @media (max-width:520px){
+    .flower{width:160px;height:160px}
+    .petal.outer{width:120px;height:150px;margin:-75px 0 0 -60px}
+    .petal.mid{width:96px;height:120px;margin:-60px 0 0 -48px}
+    .petal.inner{width:72px;height:90px;margin:-45px 0 0 -36px}
+    .stem{height:90px}
+    .leaf{width:76px;height:40px}
+  }
+</style>
+</head>
+<body>
+  <div class="flower-wrap" aria-hidden="true">
+    <div class="flower" role="img" aria-label="Gül motifi">
+      <div class="petal outer p1"></div>
+      <div class="petal outer p2"></div>
+      <div class="petal outer p3"></div>
+      <div class="petal outer p4"></div>
+      <div class="petal outer p5"></div>
+      <div class="petal outer p6"></div>
+      <div class="petal outer p7"></div>
+      <div class="petal outer p8"></div>
+
+      <div class="petal mid p1"></div>
+      <div class="petal mid p2"></div>
+      <div class="petal mid p3"></div>
+      <div class="petal mid p4"></div>
+      <div class="petal mid p5"></div>
+      <div class="petal mid p6"></div>
+      <div class="petal mid p7"></div>
+      <div class="petal mid p8"></div>
+
+      <div class="petal inner p1"></div>
+      <div class="petal inner p2"></div>
+      <div class="petal inner p3"></div>
+      <div class="petal inner p4"></div>
+      <div class="petal inner p5"></div>
+
+      <div class="center"></div>
+      <div class="stem" aria-hidden="true"></div>
+      <div class="leaf l1" aria-hidden="true"></div>
+      <div class="leaf l2" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <main class="card" role="main" aria-labelledby="title">
+    <h1 id="title">Hoşgeldin Görkemm Nasılsın Kuzu😇</h1>
+    <h1 id="title">Beni Affeder misin?</h1>
+    <p class="lead">Seçimini yap ama acele etme lütfen🥲​;</p>
+
+    <div class="controls" id="controls">
+      <!-- "visible" sınıfı başlangıçta eklendi, böylece buton görünür -->
+      <button id="affet" class="action visible" aria-label="Affettim">Affettim</button>
+      <button id="affetmedim" class="action" aria-label="Affetmedim">Affetmedim</button>
+    </div>
+
+    <div class="hint" id="hint" aria-live="polite"></div>
+  </main>
+
+  <div class="thanks" id="thanks" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="panel">
+      <h2>İyi ki varsın🙃</h2>
+      <p>​🥰Varlığın benim için çok değerli.😇​</p>
+      <p>😑😑😑Ve bana bir daha küsme veya benden uzaklaşma😑😑😑</p>
+      <p>Biliyorum Son Zamanlarda Canını Sıkıyorum.;</p>
+      <p>Ve bu projeye 28.10.2025 de senin için başladım evet birazdık yardım aldım ama emeğimde büyük lütfen emeğe saygı.😐 </p>
+      <h1>​🌻​GÜZELLER GÜZELİ GICIK​🌹​</h1>
+    </div>
+  </div>
+
+<script>
+  (function(){
+    const affetBtn = document.getElementById('affet');
+    const affetmedimBtn = document.getElementById('affetmedim');
+    const hint = document.getElementById('hint');
+    const thanks = document.getElementById('thanks');
+
+    let clickCount = 0;
+    let currentScale = 1;
+    const growStep = 0.12;
+
+    function updateAffetVisual(){
+      affetBtn.style.transform = `scale(${currentScale})`;
+      if(currentScale > 1.05) affetBtn.classList.add('grow'); else affetBtn.classList.remove('grow');
+    }
+
+    affetmedimBtn.addEventListener('click', function(){
+      clickCount++;
+      currentScale += growStep;
+      // her basışta görsel vurgu
+      affetBtn.animate([
+        { transform: `scale(${currentScale - 0.06}) rotate(-4deg)`, opacity:1 },
+        { transform: `scale(${currentScale}) rotate(4deg)`, opacity:1 },
+        { transform: `scale(${currentScale}) rotate(0deg)`, opacity:1 }
+      ], { duration:380, easing:'ease-in-out' });
+
+      updateAffetVisual();
+      
+    });
+
+    affetBtn.addEventListener('click', function(){
+      thanks.classList.add('show');
+      thanks.setAttribute('aria-hidden','false');
+
+      affetBtn.disabled = true;
+      affetmedimBtn.disabled = true;
+      affetBtn.style.cursor = 'default';
+      affetmedimBtn.style.cursor = 'default';
+      hint.textContent = '';
+    });
+
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'a' || e.key === 'A'){ affetBtn.click(); }
+      if((e.key === 'd' || e.key === 'D')){ affetmedimBtn.click(); }
+      if(e.key === 'Escape' && thanks.classList.contains('show')){
+        thanks.classList.remove('show');
+        thanks.setAttribute('aria-hidden','true');
+      }
+    });
+
+    
+    hint.textContent = 'Seçimini yapmak için butonlardan birine bas.';
+    updateAffetVisual();
+  })();
+</script>
+</body>
+</html>
